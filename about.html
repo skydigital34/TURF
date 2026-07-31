@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurfX | About Us</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .horizontal-scroll-grid {
+            display: flex !important;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .horizontal-scroll-grid::-webkit-scrollbar { height: 6px; }
+        .horizontal-scroll-grid::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+        .horizontal-scroll-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        .horizontal-scroll-grid > div {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero .hero-title { font-size: 3.5rem !important; }
+        }
+        @media (min-width: 769px) {
+            .desktop-row-reverse { flex-direction: row-reverse !important; }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Background Effects -->
+    <div class="noise-overlay"></div>
+    <div class="orange-glow-bg"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><img src="logo.png" alt="TURF X" style="height: 70px;"></a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link" style="color: var(--primary);">About</a></li>
+                    <li><a href="index.html#facilities" class="nav-link">Facilities</a></li>
+                    <li><a href="index.html#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="index.html#gallery" class="nav-link">Gallery</a></li>
+                </ul>
+            </nav>
+            <div class="header-action">
+                <a href="index.html#booking" class="btn btn-primary magnetic-btn">Book Now</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- About Hero Section -->
+        <section class="hero about-hero" id="hero" style="height: 60vh; min-height: 400px; padding-top: 100px;">
+            <div class="hero-bg">
+                <img src="images/gallery-1.jpg" alt="About TurfX">
+                <div class="hero-overlay"
+                    style="background: linear-gradient(to top, rgba(5,5,5,1) 0%, rgba(5,5,5,0.6) 100%);"></div>
+            </div>
+            <div class="container hero-container" style="justify-content: center; text-align: center; height: 100%;">
+                <div class="hero-content" style="max-width: 800px; margin: auto;">
+                    <h1 class="hero-title" style="margin-bottom: 0;">
+                        <span class="text-reveal highlight">OUR STORY</span>
+                    </h1>
+                    <p class="hero-subtitle" style="margin-top: 1rem;">Redefining the sports experience with world-class
+                        facilities and unmatched passion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision & Mission -->
+        <section class="section-padding" style="padding-top: 50px;">
+            <div class="container">
+                <div class="vision-mission-grid horizontal-scroll-grid" style="gap: 2rem;">
+                    <div class="glass-card text-center" style="padding: 4rem 2rem;">
+                        <i class="fas fa-bullseye"
+                            style="font-size: 4rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                        <h2 class="section-title" style="font-size: 3rem;">Our Mission</h2>
+                        <p class="text-gray" style="font-size: 1.1rem; line-height: 1.8;">To provide professional-grade
+                            sports infrastructure accessible to everyone. We believe that every athlete, amateur or
+                            professional, deserves to play on a pitch that brings out their best performance without
+                            compromising on safety or luxury.</p>
+                    </div>
+                    <div class="glass-card text-center" style="padding: 4rem 2rem;">
+                        <i class="fas fa-eye" style="font-size: 4rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                        <h2 class="section-title" style="font-size: 3rem;">Our Vision</h2>
+                        <p class="text-gray" style="font-size: 1.1rem; line-height: 1.8;">To become the ultimate hub for
+                            sports enthusiasts globally, fostering a community of passionate players, and setting the
+                            gold standard for premium sports facilities across the nation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Journey -->
+        <section class="about-section section-padding" style="background: var(--bg-secondary);">
+            <div class="container about-container desktop-row-reverse">
+                <div class="about-image-wrapper">
+                    <div class="about-image glass-card">
+                        <img src="images/gallery-3.jpg" alt="Turf Journey">
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">The TurfX Journey</h2>
+                    <p class="section-desc">Born from a passion for the game, TurfX started in 2014 when a group of
+                        professional players realized the lack of quality playing surfaces in the city. What began as a
+                        single 5-a-side pitch has now evolved into a state-of-the-art multi-sport arena.</p>
+                    <p class="section-desc">Every blade of grass, every floodlight, and every locker room detail has
+                        been meticulously chosen to replicate the environment of top-tier international stadiums.</p>
+                    <div class="mt-4">
+                        <a href="index.html#booking" class="btn btn-primary magnetic-btn">Experience It Today</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Core Values</h2>
+                </div>
+                <div class="values-grid horizontal-scroll-grid" style="gap: 1.5rem;">
+                    <div class="glass-card text-center" style="height: auto; padding: 3rem 2rem;">
+                        <i class="fas fa-gem"
+                            style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Premium Quality</h3>
+                        <p class="text-gray mt-2">Zero compromises on our facilities. We use only FIFA-approved 5G turf.
+                        </p>
+                    </div>
+                    <div class="glass-card text-center" style="height: auto; padding: 3rem 2rem;">
+                        <i class="fas fa-users"
+                            style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Community First</h3>
+                        <p class="text-gray mt-2">Building a supportive ecosystem where players connect and grow
+                            together.</p>
+                    </div>
+                    <div class="glass-card text-center" style="height: auto; padding: 3rem 2rem;">
+                        <i class="fas fa-shield-alt"
+                            style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Player Safety</h3>
+                        <p class="text-gray mt-2">Advanced shock pads and regular maintenance to prevent sports
+                            injuries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="logo">
+                    <a href="index.html"><img src="logo.png" alt="TURF X" style="height: 80px;"></a>
+                </div>
+                <p class="mt-2 text-gray">The ultimate premium football turf experience. Play hard, win easy in luxury.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#facilities">Facilities</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email Address">
+                    <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 TurfX. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-modal-content glass-card">
+            <span class="modal-close" id="bookingModalClose" style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
+            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your Slot</h2>
+            <form class="luxury-form">
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="text" id="modal-name-about" required>
+                    <label for="modal-name-about">Full Name</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="tel" id="modal-phone-about" required>
+                    <label for="modal-phone-about">Phone Number</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="date" id="modal-date-about" required>
+                    <label for="modal-date-about" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Select Date</label>
+                </div>
+                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 1.2rem;">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

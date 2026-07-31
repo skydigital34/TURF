@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurfX | Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * { cursor: auto !important; }
+        body { padding: 50px 0; }
+        .admin-section { margin-bottom: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; white-space: nowrap; }
+        th, td { padding: 15px; border-bottom: 1px solid var(--border); text-align: left; }
+        th { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary); }
+        select, input { background: var(--bg-secondary); border: 1px solid var(--border); color: white; padding: 8px; border-radius: 4px; width: 100%; box-sizing: border-box; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        .action-btn:hover { background: var(--primary-hover); }
+        
+        .flex-row { display: flex; gap: 20px; margin-top: 20px; max-width: 500px; }
+        .flex-row-add-slot { display: flex; gap: 15px; margin-top: 15px; align-items: flex-end; }
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        
+        @media (max-width: 768px) {
+            body { padding: 10px 0; }
+            .container { padding: 0 15px; width: 100%; box-sizing: border-box; }
+            .glass-card { padding: 15px; }
+            .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 20px; }
+            h2 { font-size: 1.5rem; margin-bottom: 10px; }
+            h3 { font-size: 1.2rem; }
+            th, td { padding: 10px 8px; font-size: 0.9rem; }
+            .flex-row, .flex-row-add-slot { flex-direction: column; align-items: stretch; gap: 12px; margin-top: 15px; }
+            .flex-row-add-slot button { height: 45px !important; padding: 10px; font-size: 1rem; margin-top: 5px; }
+            .action-btn { width: 100%; margin-top: 5px; padding: 8px; font-size: 0.9rem; }
+            select, input { padding: 10px; font-size: 1rem; height: 45px !important; }
+            .btn { width: 100%; padding: 12px; text-align: center; box-sizing: border-box; }
+            .admin-section { margin-bottom: 25px; }
+            table { min-width: 500px; } /* Ensures table scrolls instead of squishing too much */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">TurfX Admin Panel</h1>
+        
+        <div class="admin-section glass-card">
+            <h2>Pricing Management</h2>
+            <div class="flex-row">
+                <div style="display: flex; flex-direction: column; flex: 1;">
+                    <label style="margin-bottom: 5px; color: var(--gray); font-size: 0.9rem;">Weekday Price (₹/hr)</label>
+                    <input type="number" id="weekday-price" style="height: 40px;">
+                </div>
+                <div style="display: flex; flex-direction: column; flex: 1;">
+                    <label style="margin-bottom: 5px; color: var(--gray); font-size: 0.9rem;">Weekend Price (₹/hr)</label>
+                    <input type="number" id="weekend-price" style="height: 40px;">
+                </div>
+            </div>
+            <button class="btn btn-primary mt-4" onclick="savePricing()">Save Pricing</button>
+        </div>
+
+        <div class="admin-section glass-card">
+            <h2>Slot Management</h2>
+            <div class="table-responsive">
+                <table id="slots-table">
+                    <thead>
+                        <tr>
+                            <th>Time Slot</th>
+                            <th>Status</th>
+                            <th>Sport</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="slots-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+                <h3>Add New Slot</h3>
+                <div class="flex-row-add-slot">
+                    <div style="display: flex; flex-direction: column; flex: 2;">
+                        <label style="margin-bottom: 5px; color: var(--gray); font-size: 0.9rem;">Time (e.g., 06:00 AM - 07:00 AM)</label>
+                        <input type="text" id="new-slot-time" style="height: 40px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; flex: 1;">
+                        <label style="margin-bottom: 5px; color: var(--gray); font-size: 0.9rem;">Status</label>
+                        <select id="new-slot-status" style="height: 40px;">
+                            <option value="available">Available</option>
+                            <option value="limited">Limited</option>
+                            <option value="booked">Booked</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; flex-direction: column; flex: 1;">
+                        <label style="margin-bottom: 5px; color: var(--gray); font-size: 0.9rem;">Sport</label>
+                        <select id="new-slot-sport" style="height: 40px;">
+                            <option value="football">Football</option>
+                            <option value="cricket">Cricket</option>
+                            <option value="volleyball">Volleyball</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="addSlot()" style="height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: none;">Add Slot</button>
+                </div>
+            </div>
+        </div>
+        <a href="index.html" class="btn btn-secondary">Back to Site</a>
+    </div>
+
+    <script>
+        if (sessionStorage.getItem("adminAuth") !== "true") {
+            window.location.href = "index.html";
+        }
+
+        const defaultSlots = [
+            { id: 1, time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
+            { id: 2, time: "07:00 AM - 08:00 AM", status: "limited", sport: "cricket" },
+            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "volleyball" },
+            { id: 4, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
+            { id: 5, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
+            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "volleyball" }
+        ];
+
+        let slots = JSON.parse(localStorage.getItem('turfx_slots')) || defaultSlots;
+        let pricing = JSON.parse(localStorage.getItem('turfx_pricing')) || { weekdays: 700, weekends: 800 };
+
+        function renderPricing() {
+            document.getElementById('weekday-price').value = pricing.weekdays;
+            document.getElementById('weekend-price').value = pricing.weekends;
+        }
+
+        function savePricing() {
+            pricing.weekdays = document.getElementById('weekday-price').value;
+            pricing.weekends = document.getElementById('weekend-price').value;
+            localStorage.setItem('turfx_pricing', JSON.stringify(pricing));
+            alert('Pricing saved successfully!');
+        }
+
+        function renderSlots() {
+            const tbody = document.getElementById('slots-body');
+            tbody.innerHTML = '';
+            slots.forEach((slot, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${slot.time}</td>
+                    <td>
+                        <select onchange="updateSlot(${index}, 'status', this.value)">
+                            <option value="available" ${slot.status === 'available' ? 'selected' : ''}>Available</option>
+                            <option value="limited" ${slot.status === 'limited' ? 'selected' : ''}>Limited</option>
+                            <option value="booked" ${slot.status === 'booked' ? 'selected' : ''}>Booked</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select onchange="updateSlot(${index}, 'sport', this.value)">
+                            <option value="football" ${slot.sport === 'football' ? 'selected' : ''}>Football</option>
+                            <option value="cricket" ${slot.sport === 'cricket' ? 'selected' : ''}>Cricket</option>
+                            <option value="volleyball" ${slot.sport === 'volleyball' ? 'selected' : ''}>Volleyball</option>
+                        </select>
+                    </td>
+                    <td><button class="action-btn" style="background: #e74c3c;" onclick="deleteSlot(${index})">Delete</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateSlot(index, field, value) {
+            slots[index][field] = value;
+            saveSlots();
+        }
+
+        function addSlot() {
+            const time = document.getElementById('new-slot-time').value;
+            const status = document.getElementById('new-slot-status').value;
+            const sport = document.getElementById('new-slot-sport').value;
+            if(!time) return alert("Please enter time");
+            
+            slots.push({ id: Date.now(), time, status, sport });
+            document.getElementById('new-slot-time').value = '';
+            saveSlots();
+            renderSlots();
+        }
+
+        function deleteSlot(index) {
+            if(confirm("Are you sure?")) {
+                slots.splice(index, 1);
+                saveSlots();
+                renderSlots();
+            }
+        }
+
+        function saveSlots() {
+            localStorage.setItem('turfx_slots', JSON.stringify(slots));
+        }
+
+        // Initialize
+        renderPricing();
+        renderSlots();
+    </script>
+</body>
+</html>

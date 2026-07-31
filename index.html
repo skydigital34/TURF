@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurfX | Premium Football Turf</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6A00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="WhatsApp_Image_2026-07-18_at_2.03.01_PM-removebg-preview.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+
+    <!-- Background Effects -->
+    <div class="noise-overlay"></div>
+    <div class="orange-glow-bg"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#"><img src="WhatsApp_Image_2026-07-18_at_2.03.01_PM-removebg-preview.png" alt="TURF X" style="height: 90px;"></a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#facilities" class="nav-link">Facilities</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="#" onclick="promptAdmin(event)" class="nav-link">Admin</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-action" style="display: flex; gap: 1rem; align-items: center;">
+                <button id="theme-toggle" class="btn btn-secondary magnetic-btn"
+                    style="padding: 0; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <a href="#booking" class="btn btn-primary magnetic-btn">Book Now</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="hero" id="hero">
+            <div class="hero-bg">
+                <img src="image.png" alt="Football Turf at Night">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="text-reveal">PLAY HARD.</span>
+                        <span class="text-reveal highlight">WIN EASY.</span>
+                    </h1>
+                    <p class="hero-subtitle">Experience the ultimate premium multi-sport turf. Football, Cricket &
+                        Volleyball. Designed for champions, built for luxury.</p>
+                    <div class="hero-buttons">
+                        <a href="#booking" class="btn btn-primary magnetic-btn">Book Now</a>
+                        <a href="#live-booking" class="btn btn-secondary magnetic-btn">Check Availability</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Live Slot Booking -->
+        <section class="booking-section section-padding" id="live-booking">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Live Slot Booking</h2>
+                    <p class="section-subtitle">Reserve your game time instantly. Premium slots sell out fast.</p>
+                </div>
+                <div class="booking-widget glass-card">
+                    <div class="booking-controls" style="flex-wrap: wrap; gap: 20px;">
+                        <div class="sport-filters" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="filter-btn active sport-btn" data-sport="football"><i
+                                    class="fas fa-futbol"></i> Football</button>
+                            <button class="filter-btn sport-btn" data-sport="cricket"><i
+                                    class="fas fa-baseball-ball"></i> Cricket</button>
+                            <button class="filter-btn sport-btn" data-sport="volleyball"><i
+                                    class="fas fa-volleyball-ball"></i> Volleyball</button>
+                        </div>
+                        <div class="date-picker">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="date" id="booking-date" value="2024-05-20">
+                        </div>
+                        <div class="legend">
+                            <span class="legend-item"><span class="dot dot-green"></span> Available</span>
+                            <span class="legend-item"><span class="dot dot-orange"></span> Limited</span>
+                            <span class="legend-item"><span class="dot dot-red"></span> Booked</span>
+                        </div>
+                    </div>
+                    <div class="slots-grid" id="slots-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                    <form class="luxury-form mt-4" onsubmit="event.preventDefault(); var n = document.getElementById('b-name').value; var p = document.getElementById('b-phone').value; var d = document.getElementById('booking-date') ? document.getElementById('booking-date').value : ''; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; window.location.href = 'https://wa.me/919994157721?text=' + encodeURIComponent(text);"
+                        style="text-align: left; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Enter Your Details</h3>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="input-group" style="flex: 1;">
+                                <input type="text" id="b-name" required>
+                                <label for="b-name">Full Name</label>
+                            </div>
+                            <div class="input-group" style="flex: 1;">
+                                <input type="tel" id="b-phone" required>
+                                <label for="b-phone">Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="booking-action text-center mt-2">
+                            <button type="submit" class="btn btn-primary magnetic-btn w-100">Confirm Booking</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: About the Turf -->
+        <section class="about-section section-padding" id="about">
+            <div class="container about-container">
+                <div class="about-image-wrapper">
+                    <div class="about-image glass-card">
+                        <img src="images/gallery-1.jpg" alt="Turf Ground">
+                    </div>
+
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">Built for Champions</h2>
+                    <p class="section-desc">Our premium artificial turf is designed to replicate the exact feel of
+                        professional grass pitches. We offer state-of-the-art facilities for an unmatched playing
+                        experience.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> LED Floodlights</li>
+                        <li><i class="fas fa-ruler-combined"></i> 35m x 17.5m Playing Area (6,592 sq.ft / 15.3 Cents)</li>
+                    </ul>
+                    <a href="about.html" class="btn btn-secondary magnetic-btn mt-4">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Facilities -->
+        <section class="facilities-section section-padding" id="facilities">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Premium Facilities</h2>
+                    <p class="section-subtitle">Everything you need for the perfect game.</p>
+                </div>
+                <div class="facilities-grid">
+                    <div class="facility-card glass-card">
+                        <div class="icon-wrapper"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Flood Lights</h3>
+                        <p>Pro-grade LED lighting</p>
+                    </div>
+                    <div class="facility-card glass-card">
+                        <div class="icon-wrapper"><i class="fas fa-car"></i></div>
+                        <h3>Parking</h3>
+                        <p>Parking</p>
+                    </div>
+                    <div class="facility-card glass-card">
+                        <div class="icon-wrapper"><i class="fas fa-restroom"></i></div>
+                        <h3>Washroom</h3>
+                        <p>Clean & hygienic</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Why Choose Us -->
+        <section class="why-us-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Why Choose Us</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-star"></i></div>
+                        <div class="timeline-content glass-card">
+                            <h3>100% Premium Turf</h3>
+                            <p>Imported FIFA standard artificial grass for safety and performance.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-tools"></i></div>
+                        <div class="timeline-content glass-card">
+                            <h3>Professional Maintenance</h3>
+                            <p>Daily grooming and sanitization of the playing surface.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-headset"></i></div>
+                        <div class="timeline-content glass-card">
+                            <h3>24x7 Support</h3>
+                            <p>Dedicated staff available round the clock for your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Events & Parties -->
+        <style>
+            .events-badge {
+                position: absolute; 
+                top: -10px; 
+                right: 10px; 
+                background: var(--bg-dark); 
+                color: white; 
+                width: 130px; 
+                height: 130px; 
+                border-radius: 50%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                font-family: 'Inter', sans-serif; 
+                font-weight: 700; 
+                font-size: 1rem; 
+                transform: rotate(10deg); 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+                border: 4px solid var(--primary); 
+                z-index: 2; 
+                flex-direction: column; 
+                line-height: 1.2;
+            }
+            @media (max-width: 768px) {
+                .events-badge {
+                    position: relative;
+                    top: 0;
+                    right: 0;
+                    margin-bottom: 20px;
+                    width: 100px;
+                    height: 100px;
+                    font-size: 0.8rem;
+                    transform: rotate(0deg);
+                }
+                .events-banner {
+                    padding: 2rem 1rem !important;
+                }
+                .events-facilities-grid {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                }
+                .events-facility-card h3 {
+                    font-size: 0.9rem !important;
+                }
+                .events-facility-card .icon-wrapper {
+                    width: 35px !important;
+                    height: 35px !important;
+                    font-size: 1rem !important;
+                }
+            }
+        </style>
+        <section class="events-section section-padding" id="events">
+            <div class="container">
+                <div class="events-banner glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; padding: 4rem 2rem;">
+                    <!-- Badge/Circle -->
+                    <div class="events-badge">
+                        <span>PLAY.</span>
+                        <span>PARTY.</span>
+                        <span>MAKE</span>
+                        <span>MEMORIES!</span>
+                    </div>
+
+                    <h2 class="section-title" style="font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 0.5rem; text-transform: uppercase;">
+                        <span style="color: var(--primary);">RENT SPACE</span><br>
+                        FOR EVENTS &<br>BIRTHDAY PARTIES
+                    </h2>
+                    
+                    <div style="background: #222; padding: 10px 20px; border-radius: 5px; position: relative; margin-top: 1rem; margin-bottom: 2rem; max-width: 100%;">
+                        <div style="position: absolute; top: 50%; left: -15px; transform: translateY(-50%); width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-right: 15px solid #222; display: none;"></div>
+                        <div style="position: absolute; top: 50%; right: -15px; transform: translateY(-50%); width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 15px solid #222; display: none;"></div>
+                        <p class="section-subtitle" style="font-size: clamp(0.9rem, 3vw, 1.5rem); letter-spacing: 1px; color: white; text-transform: uppercase; margin: 0; font-family: 'Bebas Neue', sans-serif;">WITH FUN GAMES & ACTIVITIES</p>
+                    </div>
+
+                    <div class="facilities-grid events-facilities-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); width: 100%; max-width: 900px; gap: 1rem;">
+                        <div class="facility-card events-facility-card glass-card" style="padding: 1rem; display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                            <div class="icon-wrapper" style="width: 45px; height: 45px; font-size: 1.2rem; margin: 0; flex-shrink: 0;"><i class="fas fa-gamepad"></i></div>
+                            <h3 style="font-size: 1.1rem; margin: 0; text-align: left;">FUN<br>GAMES</h3>
+                        </div>
+                        <div class="facility-card events-facility-card glass-card" style="padding: 1rem; display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                            <div class="icon-wrapper" style="width: 45px; height: 45px; font-size: 1.2rem; margin: 0; flex-shrink: 0;"><i class="fas fa-music"></i></div>
+                            <h3 style="font-size: 1.1rem; margin: 0; text-align: left;">MUSIC</h3>
+                        </div>
+                        <div class="facility-card events-facility-card glass-card" style="padding: 1rem; display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                            <div class="icon-wrapper" style="width: 45px; height: 45px; font-size: 1.2rem; margin: 0; flex-shrink: 0;"><i class="fas fa-hamburger"></i></div>
+                            <h3 style="font-size: 1.1rem; margin: 0; text-align: left;">FOOD<br>AREA</h3>
+                        </div>
+                        <div class="facility-card events-facility-card glass-card" style="padding: 1rem; display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                            <div class="icon-wrapper" style="width: 45px; height: 45px; font-size: 1.2rem; margin: 0; flex-shrink: 0;"><i class="fas fa-glass-cheers"></i></div>
+                            <h3 style="font-size: 1.1rem; margin: 0; text-align: left;">CELEBRATIONS</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Pricing -->
+        <section class="pricing-section section-padding" id="pricing">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Pricing Plans</h2>
+                    <p class="section-subtitle">No	time-based	tiers,	no	hidden	charges.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <h3>Weekdays</h3>
+                        
+                        </div>
+                        <div class="pricing-price">
+                            <span class="currency">₹</span><span class="amount" id="price-weekday">700</span><span class="period">/hr</span>
+                        </div>
+                        <button class="btn btn-secondary magnetic-btn w-100">Book Now</button>
+                    </div>
+                    <div class="pricing-card glass-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Weekends</h3>
+                           
+                        </div>
+                        <div class="pricing-price">
+                            <span class="currency">₹</span><span class="amount" id="price-weekend">800</span><span class="period">/hr</span>
+                        </div>
+                        <button class="btn btn-primary magnetic-btn w-100">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 9: Upcoming Tournament -->
+        <section class="tournaments-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Upcoming Tournament</h2>
+                </div>
+                <div class="tournament-card glass-card">
+                    <div class="tourney-image">
+                        <img src="images/image.png" alt="Tournament Trophy">
+                    </div>
+                    <div class="tourney-content">
+                        <div class="tourney-badge">Cricket Turf Tournament 2026</div>
+                        <h3>Dhaksha Backdrop & Goodwill Sports</h3>
+                        <ul style="list-style: none; padding: 0; margin-bottom: 1.5rem; line-height: 1.8; color: var(--gray);">
+                            <li><strong>Dates:</strong> 8th & 9th August 2026</li>
+                            <li><strong>Total Teams:</strong> 32 Teams</li>
+                            <li><strong>Entry Fee:</strong> ₹1,500</li>
+                            <li><strong>Prizes:</strong> Winners ₹5000 + Trophy | Runners ₹3000 + Trophy</li>
+                        </ul>
+                        <p style="margin-bottom: 0.5rem;"><em>Beginners are allowed! Complimentary refreshments provided.</em></p>
+                        <p><strong>Contact:</strong> 99941 57721 / 9600429004 / 9080242282</p>
+                        <a href="https://wa.me/919994157721?text=Hi,%20I%20would%20like%20to%20register%20my%20team%20for%20the%20Cricket%20Turf%20Tournament%202026." class="btn btn-primary magnetic-btn mt-3" target="_blank">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 13: Contact -->
+        <section class="contact-section section-padding" id="contact">
+            <div class="container contact-container">
+                <div class="contact-form-wrapper glass-card">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Get in Touch</h2>
+                    <form class="luxury-form" onsubmit="event.preventDefault(); window.location.href = 'mailto:goodwillsportsturfx@gmail.com?subject=Enquiry from ' + document.getElementById('name').value + '&body=' + encodeURIComponent(document.getElementById('message').value + '\n\nFrom: ' + document.getElementById('email').value);">
+                        <div class="input-group">
+                            <input type="text" id="name" required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email" required>
+                            <label for="email">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="message" rows="4" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary magnetic-btn mt-2 w-100">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info glass-card">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>A1, Geethanjali Street, Phase II, Vellakinar Village, Coimbatore, Tamil Nadu – 641029.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:goodwillsportsturfx@gmail.com" style="color: inherit; text-decoration: none;">goodwillsportsturfx@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 99941 57721 | 80567 49172 | 98434 62330</p>
+                        </div>
+                    </div>
+                    <div class="social-links mt-4">
+                        <a href="https://www.instagram.com/goodwillsportsturfx?igsh=cmp2dzNpeHNta3g0" target="_blank" class="magnetic-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/919994157721" target="_blank" class="magnetic-btn whatsapp"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Section 14: Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="logo">
+                    <a href="#"><img src="WhatsApp_Image_2026-07-18_at_2.03.01_PM-removebg-preview.png" alt="TURF X" style="height: 80px;"></a>
+                </div>
+                <p class="mt-2 text-gray">The ultimate premium football turf experience. Play hard, win easy in luxury.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#facilities">Facilities</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Goodwill Sports Turf X. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919994157721" target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img src="" alt="Popup Image" id="modalImage">
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-modal-content glass-card">
+            <span class="modal-close" id="bookingModalClose"
+                style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
+            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your
+                Slot</h2>
+            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; window.location.href = 'https://wa.me/919994157721?text=' + encodeURIComponent(text);">
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="text" id="modal-name" required>
+                    <label for="modal-name">Full Name</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="tel" id="modal-phone" required>
+                    <label for="modal-phone">Phone Number</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="date" id="modal-date" required>
+                    <label for="modal-date" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Select
+                        Date</label>
+                </div>
+                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 1.2rem;">Confirm
+                    Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation (App-like) -->
+    <div class="mobile-bottom-nav">
+        <a href="#hero" class="bottom-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#facilities" class="bottom-nav-item">
+            <i class="fas fa-dumbbell"></i>
+            <span>Facilities</span>
+        </a>
+        <a href="#booking" class="bottom-nav-item center-nav-item">
+            <div class="center-btn">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <span>Book</span>
+        </a>
+        <a href="#pricing" class="bottom-nav-item">
+            <i class="fas fa-tag"></i>
+            <span>Pricing</span>
+        </a>
+        <a href="#contact" class="bottom-nav-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
