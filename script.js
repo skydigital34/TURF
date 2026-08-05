@@ -623,16 +623,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const slots = JSON.parse(localStorage.getItem('turfx_slots')) || [
             { id: 1, time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
             { id: 2, time: "07:00 AM - 08:00 AM", status: "limited", sport: "cricket" },
-            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "volleyball" },
+            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "football" },
             { id: 4, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
             { id: 5, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
-            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "volleyball" }
+            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "cricket" }
         ];
 
         const sportIcons = {
             football: 'fa-futbol',
-            cricket: 'fa-baseball-ball',
-            volleyball: 'fa-volleyball-ball'
+            cricket: 'fa-baseball-ball'
         };
 
         const statusLabels = {
@@ -691,3 +690,155 @@ window.promptAdmin = function(e) {
         alert("Incorrect password!");
     }
 };
+
+// ==========================================
+// POLICY MODAL HANDLER
+// ==========================================
+const policyData = {
+    cancellation: {
+        title: "Cancellation & Refund Policy",
+        content: `
+            <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 1rem; font-weight: 600;">Last updated: 09 July 2026</p>
+            
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.1 Cancellation by the customer</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;"><strong>More than 24 hours before the slot:</strong> Full refund of any amount paid, or a free reschedule to another available slot.</li>
+                <li style="margin-bottom: 0.4rem;"><strong>Within 24 hours of the slot:</strong> No refund. The customer may, at our discretion, reschedule once to another available slot within 30 days.</li>
+                <li style="margin-bottom: 0.4rem;"><strong>Failure to attend without notice (no-show):</strong> No refund and no reschedule.</li>
+            </ul>
+            <p style="margin-bottom: 1rem;">Cancellations must be communicated by WhatsApp or telephone on <strong>+91 99941 57721</strong>. A cancellation is effective only when we acknowledge it.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.2 Late arrival</h4>
+            <p style="margin-bottom: 1rem;">Slots begin and end at the booked times. If a customer arrives late, play ends at the originally scheduled time and no reduction in charge is made.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.3 Cancellation by Goodwill Turf</h4>
+            <p style="margin-bottom: 1rem;">If we cancel or curtail a booking — whether because of adverse weather, power failure, maintenance, statutory direction, or any other cause — the customer may choose either a full refund of the affected portion or a free reschedule to another available slot.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.4 Rain and weather</h4>
+            <p style="margin-bottom: 1rem;">The playing surface drains and remains usable in light rain. The decision to close the Turf in heavy rain rests with our staff on site. Where we close the Turf, clause 3.3 applies. Where the Turf remains open and the customer chooses not to play, clause 3.1 applies.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.5 Refund processing</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">Approved refunds are processed to the original method of payment, or by bank transfer where payment was made in cash.</li>
+                <li style="margin-bottom: 0.4rem;">Refunds are processed within 7 working days of approval.</li>
+                <li style="margin-bottom: 0.4rem;">No cancellation or processing fee is deducted.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3.6 Contact</h4>
+            <p style="margin-bottom: 0.5rem;">For any cancellation, reschedule or refund query, contact us on <strong>+91 99941 57721</strong> or at <strong>goodwillsportsturfx@gmail.com</strong>.</p>
+            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.8rem;">Goodwill Sports · 33/2, Tank Street, Mettu Thottam, Chinnavedampatti, Coimbatore 641049 · goodwillsportscbe@gmail.com</p>
+        `
+    },
+    terms: {
+        title: "Terms & Conditions",
+        content: `
+            <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 1rem; font-weight: 600;">Last updated: 09 July 2026</p>
+            <p style="margin-bottom: 1rem;">These Terms & Conditions govern your use of the Goodwill Turf website and your booking and use of the Goodwill Turf facility at A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029, Tamil Nadu ("the Turf"), operated by Goodwill Sports ("we", "us", "our"). By booking a slot or entering the premises, you ("the customer") agree to these terms.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.1 Bookings</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">The Turf is available for booking 24 hours a day, 7 days a week, subject to slot availability.</li>
+                <li style="margin-bottom: 0.4rem;">The charge is ₹800 per hour, applicable to all slots on all days. This rate is inclusive of use of the playing surface, floodlights, washroom and parking.</li>
+                <li style="margin-bottom: 0.4rem;">A booking is confirmed only when we acknowledge it in writing by WhatsApp, email or telephone. Submitting a form on the website is a request, not a confirmed booking.</li>
+                <li style="margin-bottom: 0.4rem;">Availability shown on the website is indicative. In the event of a conflict, our records govern.</li>
+                <li style="margin-bottom: 0.4rem;">A booking is for the stated duration only. Play must stop at the end of the booked slot to allow the next booking to begin on time.</li>
+                <li style="margin-bottom: 0.4rem;">An advance is payable at the time of booking; the balance is payable before play begins.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.2 Conduct on the premises</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">Only non-marking sports footwear is permitted on the playing surface. Metal studs, spikes and street footwear are not allowed.</li>
+                <li style="margin-bottom: 0.4rem;">Food, chewing gum, glass containers, alcohol, tobacco products and any intoxicating substances are strictly prohibited on the playing surface and within the premises.</li>
+                <li style="margin-bottom: 0.4rem;">Customers must not damage the turf, nets, fencing, lighting or any other equipment or fixture.</li>
+                <li style="margin-bottom: 0.4rem;">Abusive language, physical violence, and any behaviour that endangers or disturbs other users or neighbouring residents is prohibited.</li>
+                <li style="margin-bottom: 0.4rem;">Customers under the age of 18 must be supervised by an accompanying adult, who accepts responsibility for them.</li>
+                <li style="margin-bottom: 0.4rem;">We reserve the right to refuse entry to, or remove from the premises, any person who breaches these terms. No refund is payable in such cases.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.3 Liability</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">Sport carries an inherent risk of injury. Customers use the Turf entirely at their own risk and are responsible for ensuring they are medically fit to play.</li>
+                <li style="margin-bottom: 0.4rem;">We do not accept liability for injury, illness or death sustained on the premises, except where caused by our proven negligence.</li>
+                <li style="margin-bottom: 0.4rem;">We do not accept responsibility for loss of, or damage to, personal property brought onto the premises, including items left in the parking area.</li>
+                <li style="margin-bottom: 0.4rem;">Customers are liable for the cost of repairing or replacing any damage they cause to the Turf or its facilities.</li>
+                <li style="margin-bottom: 0.4rem;">We recommend that customers and teams arrange their own accident and medical insurance.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.4 Closure and interruption</h4>
+            <p style="margin-bottom: 1rem;">We may close the Turf, or curtail a booking, on account of adverse weather, power failure, maintenance, statutory direction, or any other cause beyond our reasonable control. Where a booking is affected, we will offer a rescheduled slot or a refund of the affected portion, at the customer's option.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.5 Photography and recordings</h4>
+            <p style="margin-bottom: 1rem;">We may photograph or record activity at the Turf for promotional purposes. If you do not wish to appear in such material, please inform our staff before your slot begins and we will accommodate the request.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.6 General</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">We may revise these terms at any time. The version published on this website at the time of your booking applies.</li>
+                <li style="margin-bottom: 0.4rem;">These terms are governed by the laws of India. The courts at Coimbatore, Tamil Nadu have exclusive jurisdiction over any dispute.</li>
+                <li style="margin-bottom: 0.4rem;">Questions may be directed to <strong>+91 99941 57721</strong> or <strong>goodwillsportsturfx@gmail.com</strong>.</li>
+            </ul>
+        `
+    },
+    privacy: {
+        title: "Privacy Policy",
+        content: `
+            <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 1rem; font-weight: 600;">Last updated: 09 July 2026</p>
+            <p style="margin-bottom: 1rem;">Goodwill Sports operates the Goodwill Turf website. This policy explains what personal information we collect, why we collect it, and how we handle it.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.1 Information we collect</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;"><strong>Booking information:</strong> your name, mobile number, and the date and time of the slot you request.</li>
+                <li style="margin-bottom: 0.4rem;"><strong>Enquiry information:</strong> your name, email address and the contents of any message you send us through the contact form or by WhatsApp.</li>
+                <li style="margin-bottom: 0.4rem;"><strong>Technical information:</strong> basic, non-identifying data collected automatically by our website host, such as browser type and pages visited.</li>
+                <li style="margin-bottom: 0.4rem;">We do not collect or store payment card details. Payment is made in cash or by direct transfer.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.2 How we use your information</h4>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">To confirm, manage and reschedule your booking.</li>
+                <li style="margin-bottom: 0.4rem;">To contact you regarding your booking or enquiry.</li>
+                <li style="margin-bottom: 0.4rem;">To maintain our internal booking records.</li>
+                <li style="margin-bottom: 0.4rem;">To send you occasional information about offers, tournaments and events at the Turf, where you have consented to receive it. You may opt out at any time by replying to any message or contacting us.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.3 Sharing your information</h4>
+            <p style="margin-bottom: 0.5rem;">We do not sell, rent or trade your personal information. We share it only:</p>
+            <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li style="margin-bottom: 0.4rem;">With service providers who help us operate the website and communicate with customers, and who are bound to protect it;</li>
+                <li style="margin-bottom: 0.4rem;">Where required by law, court order, or a lawful request from a government authority.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.4 WhatsApp and third-party services</h4>
+            <p style="margin-bottom: 1rem;">Bookings and enquiries made through WhatsApp are also subject to WhatsApp's own privacy policy. Our website may embed Google Maps, which is subject to Google's privacy policy. We are not responsible for the privacy practices of these third parties.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.5 Retention and security</h4>
+            <p style="margin-bottom: 1rem;">We retain booking and enquiry records for as long as is necessary for our business and accounting purposes. We take reasonable measures to protect the information we hold, but no method of transmission or storage is completely secure.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.6 Your rights</h4>
+            <p style="margin-bottom: 1rem;">You may ask us to provide a copy of the information we hold about you, to correct it if it is inaccurate, or to delete it. Write to <strong>goodwillsportsturfx@gmail.com</strong> or call <strong>+91 99941 57721</strong>. We will respond within a reasonable period.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.7 Children</h4>
+            <p style="margin-bottom: 1rem;">Our website is not directed at children under 18. We do not knowingly collect information from children. Bookings for minors must be made by a parent or guardian.</p>
+
+            <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.8 Changes and contact</h4>
+            <p style="margin-bottom: 1rem;">We may update this policy from time to time; the revised version will be posted on this page with a new date. For any privacy question, contact Goodwill Sports at A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029, by phone on <strong>+91 99941 57721</strong>, or by email at <strong>goodwillsportsturfx@gmail.com</strong>.</p>
+        `
+    }
+};
+
+window.openPolicyModal = function(type, e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('policyModal');
+    const titleEl = document.getElementById('policyTitle');
+    const bodyEl = document.getElementById('policyBody');
+    if (modal && titleEl && bodyEl && policyData[type]) {
+        titleEl.textContent = policyData[type].title;
+        bodyEl.innerHTML = policyData[type].content;
+        modal.style.display = 'flex';
+    }
+};
+
+window.closePolicyModal = function() {
+    const modal = document.getElementById('policyModal');
+    if (modal) modal.style.display = 'none';
+};
+

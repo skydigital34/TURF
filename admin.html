@@ -96,7 +96,6 @@
                         <select id="new-slot-sport" style="height: 40px;">
                             <option value="football">Football</option>
                             <option value="cricket">Cricket</option>
-                            <option value="volleyball">Volleyball</option>
                         </select>
                     </div>
                     <button class="btn btn-secondary" onclick="addSlot()" style="height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: none;">Add Slot</button>
@@ -114,10 +113,10 @@
         const defaultSlots = [
             { id: 1, time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
             { id: 2, time: "07:00 AM - 08:00 AM", status: "limited", sport: "cricket" },
-            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "volleyball" },
+            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "football" },
             { id: 4, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
             { id: 5, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
-            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "volleyball" }
+            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "cricket" }
         ];
 
         let slots = JSON.parse(localStorage.getItem('turfx_slots')) || defaultSlots;
@@ -153,7 +152,6 @@
                         <select onchange="updateSlot(${index}, 'sport', this.value)">
                             <option value="football" ${slot.sport === 'football' ? 'selected' : ''}>Football</option>
                             <option value="cricket" ${slot.sport === 'cricket' ? 'selected' : ''}>Cricket</option>
-                            <option value="volleyball" ${slot.sport === 'volleyball' ? 'selected' : ''}>Volleyball</option>
                         </select>
                     </td>
                     <td><button class="action-btn" style="background: #e74c3c;" onclick="deleteSlot(${index})">Delete</button></td>
