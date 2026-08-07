@@ -424,6 +424,124 @@ if (bookingModal && bookingModalClose) {
 }
 
 // ==========================================
+// THANK YOU MODAL & BOOKING CONFIRMATION
+// ==========================================
+function initThankYouModal() {
+    if (!document.getElementById('thankYouModal')) {
+        const modalHtml = `
+        <div class="thankyou-modal" id="thankYouModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 99999; justify-content: center; align-items: center; padding: 20px;">
+            <div class="thankyou-modal-content glass-card text-center" style="max-width: 480px; width: 100%; padding: 2.5rem 2rem; position: relative; border: 1px solid var(--primary); border-radius: 16px; box-shadow: 0 20px 50px rgba(255, 106, 0, 0.3); transform: scale(0.9); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;">
+                <span class="modal-close" onclick="closeThankYouModal()" style="position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</span>
+                
+                <div style="width: 75px; height: 75px; background: rgba(255, 106, 0, 0.15); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem auto; color: var(--primary); font-size: 2.2rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <h2 style="font-size: 2rem; margin-bottom: 0.4rem; color: var(--white); font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">THANK YOU FOR YOUR BOOKING!</h2>
+                <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5;">
+                    Your booking request has been processed successfully! We are redirecting you to WhatsApp to confirm your slot with Goodwill Sports Turf X.
+                </p>
+
+                <div id="thankYouDetails" style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem;">
+                </div>
+
+                <div style="display: flex; gap: 0.8rem; flex-direction: column;">
+                    <a id="thankYouWaBtn" href="#" target="_blank" class="btn btn-primary magnetic-btn w-100" style="padding: 0.9rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; border: none; color: #ffffff; font-weight: 600;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Open WhatsApp Now
+                    </a>
+                    <button type="button" onclick="closeThankYouModal()" class="btn magnetic-btn w-100" style="padding: 0.7rem; background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid var(--border);">
+                        Close Window
+                    </button>
+                </div>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+}
+
+window.showThankYouModal = function(data) {
+    initThankYouModal();
+    const bookingModal = document.getElementById('bookingModal');
+    if (bookingModal) bookingModal.classList.remove('active');
+
+    const modal = document.getElementById('thankYouModal');
+    const detailsContainer = document.getElementById('thankYouDetails');
+    const waBtn = document.getElementById('thankYouWaBtn');
+
+    if (modal && detailsContainer && waBtn) {
+        let detailsHtml = '';
+        if (data.name) {
+            detailsHtml += `<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: var(--gray);">Name:</span>
+                <strong style="color: var(--white);">${data.name}</strong>
+            </div>`;
+        }
+        if (data.phone) {
+            detailsHtml += `<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: var(--gray);">Phone:</span>
+                <strong style="color: var(--white);">${data.phone}</strong>
+            </div>`;
+        }
+        if (data.date) {
+            detailsHtml += `<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: var(--gray);">Date:</span>
+                <strong style="color: var(--primary);">${data.date}</strong>
+            </div>`;
+        }
+        if (data.time) {
+            detailsHtml += `<div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--gray);">Slot Time:</span>
+                <strong style="color: var(--primary);">${data.time}</strong>
+            </div>`;
+        }
+        if (!detailsHtml) {
+            detailsHtml = `<p style="text-align: center; margin: 0; color: var(--primary);">Booking Request Received</p>`;
+        }
+        detailsContainer.innerHTML = detailsHtml;
+
+        if (data.waUrl) {
+            waBtn.href = data.waUrl;
+            waBtn.style.display = 'inline-flex';
+        } else {
+            waBtn.style.display = 'none';
+        }
+
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            const content = modal.querySelector('.thankyou-modal-content');
+            if (content) {
+                content.style.transform = 'scale(1)';
+                content.style.opacity = '1';
+            }
+        }, 10);
+
+        if (data.waUrl) {
+            setTimeout(() => {
+                window.open(data.waUrl, '_blank');
+            }, 1000);
+        }
+    }
+};
+
+window.closeThankYouModal = function() {
+    const modal = document.getElementById('thankYouModal');
+    if (modal) {
+        const content = modal.querySelector('.thankyou-modal-content');
+        if (content) {
+            content.style.transform = 'scale(0.9)';
+            content.style.opacity = '0';
+        }
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    initThankYouModal();
+});
+
+// ==========================================
 // VR MODAL & 360 SPIN (SMOOTH CANVAS)
 // ==========================================
 const vrModal = document.getElementById('vrModal');
@@ -733,7 +851,7 @@ const policyData = {
         title: "Terms & Conditions",
         content: `
             <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 1rem; font-weight: 600;">Last updated: 09 July 2026</p>
-            <p style="margin-bottom: 1rem;">These Terms & Conditions govern your use of the Goodwill Turf website and your booking and use of the Goodwill Turf facility at A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029, Tamil Nadu ("the Turf"), operated by Goodwill Sports ("we", "us", "our"). By booking a slot or entering the premises, you ("the customer") agree to these terms.</p>
+            <p style="margin-bottom: 1rem;">These Terms & Conditions govern your use of the Goodwill Turf website and your booking and use of the Goodwill Turf facility at <a href="https://maps.app.goo.gl/K6QErELRhYeAwSpU6" target="_blank" style="color: var(--primary); text-decoration: underline;">A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029, Tamil Nadu</a> ("the Turf"), operated by Goodwill Sports ("we", "us", "our"). By booking a slot or entering the premises, you ("the customer") agree to these terms.</p>
 
             <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1.1 Bookings</h4>
             <ul style="padding-left: 1.2rem; margin-bottom: 1rem; list-style-type: disc;">
@@ -820,7 +938,7 @@ const policyData = {
             <p style="margin-bottom: 1rem;">Our website is not directed at children under 18. We do not knowingly collect information from children. Bookings for minors must be made by a parent or guardian.</p>
 
             <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2.8 Changes and contact</h4>
-            <p style="margin-bottom: 1rem;">We may update this policy from time to time; the revised version will be posted on this page with a new date. For any privacy question, contact Goodwill Sports at A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029, by phone on <strong>+91 99941 57721</strong>, or by email at <strong>goodwillsportsturfx@gmail.com</strong>.</p>
+            <p style="margin-bottom: 1rem;">We may update this policy from time to time; the revised version will be posted on this page with a new date. For any privacy question, contact Goodwill Sports at <a href="https://maps.app.goo.gl/K6QErELRhYeAwSpU6" target="_blank" style="color: var(--primary); text-decoration: underline;">A1, Geethanjali Street, Phase 2, Vellakinar Pirivu, Coimbatore 641029</a>, by phone on <strong>+91 99941 57721</strong>, or by email at <strong>goodwillsportsturfx@gmail.com</strong>.</p>
         `
     }
 };

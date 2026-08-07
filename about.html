@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TurfX | About Us</title>
+    <title>About Us — Goodwill Turf | Football & Cricket Turf in Vellakinar, Coimbatore</title>
+    <meta name="description" content="Learn about Goodwill Sports Turf X in Vellakinar, Coimbatore. Providing world-class FIFA-standard Football and Box Cricket turf facilities since 2014.">
+    <meta name="keywords" content="Goodwill Turf, About Goodwill Sports Turf, Turf in Vellakinar, Football Turf Coimbatore, Box Cricket Coimbatore">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -226,7 +228,7 @@
         <div class="booking-modal-content glass-card">
             <span class="modal-close" id="bookingModalClose" style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
             <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your Slot</h2>
-            <form class="luxury-form">
+            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name-about').value; var p = document.getElementById('modal-phone-about').value; var d = document.getElementById('modal-date-about').value; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, waUrl: waUrl });">
                 <div class="input-group" style="margin-bottom: 1.5rem;">
                     <input type="text" id="modal-name-about" required>
                     <label for="modal-name-about">Full Name</label>

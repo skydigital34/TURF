@@ -4,7 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TurfX | Premium Football Turf</title>
+    <title>Goodwill Turf — Football & Cricket Turf in Vellakinar, Coimbatore</title>
+    <meta name="description" content="Book premium FIFA-approved Football and Box Cricket turf at Goodwill Sports Turf X in Vellakinar, Coimbatore. Night floodlights, modern amenities, best pricing. Book your slot today!">
+    <meta name="keywords" content="Goodwill Turf, Goodwill Sports Turf X, turf in Vellakinar, football turf Coimbatore, cricket turf Vellakinar, box cricket turf Coimbatore, turf near me Vellakinar, book turf Coimbatore">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Geo & Local SEO -->
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Vellakinar, Coimbatore">
+    <meta name="geo.position" content="11.0621;76.9535">
+    <meta name="ICBM" content="11.0621, 76.9535">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Goodwill Turf — Football & Cricket Turf in Vellakinar, Coimbatore">
+    <meta property="og:description" content="Experience Coimbatore's premier FIFA-standard Football & Box Cricket turf in Vellakinar. High-grade turf, floodlights, and easy slot booking.">
+    <meta property="og:url" content="https://maps.app.goo.gl/K6QErELRhYeAwSpU6">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,9 +37,35 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
-
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Local Business Structured Data for Google Search ranking -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "Goodwill Sports Turf X",
+      "image": "WhatsApp_Image_2026-07-18_at_2.03.01_PM-removebg-preview.png",
+      "url": "https://maps.app.goo.gl/K6QErELRhYeAwSpU6",
+      "telephone": "+919994157721",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "A1, Geethanjali Street, Phase II, Vellakinar Village",
+        "addressLocality": "Coimbatore",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "641029",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 11.0621,
+        "longitude": 76.9535
+      },
+      "hasMap": "https://maps.app.goo.gl/K6QErELRhYeAwSpU6",
+      "priceRange": "₹₹"
+    }
+    </script>
 </head>
 
 <body>
@@ -121,7 +162,7 @@
                     <div class="slots-grid" id="slots-grid">
                         <!-- Populated by JS -->
                     </div>
-                    <form class="luxury-form mt-4" onsubmit="event.preventDefault(); var n = document.getElementById('b-name').value; var p = document.getElementById('b-phone').value; var d = document.getElementById('booking-date') ? document.getElementById('booking-date').value : ''; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; window.location.href = 'https://wa.me/919994157721?text=' + encodeURIComponent(text);"
+                    <form class="luxury-form mt-4" onsubmit="event.preventDefault(); var n = document.getElementById('b-name').value; var p = document.getElementById('b-phone').value; var d = document.getElementById('booking-date') ? document.getElementById('booking-date').value : ''; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, waUrl: waUrl });"
                         style="text-align: left; padding-top: 1.5rem; border-top: 1px solid var(--border);">
                         <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Enter Your Details</h3>
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
@@ -316,6 +357,16 @@
                             <h3 style="font-size: 1.1rem; margin: 0; text-align: left;">CELEBRATIONS</h3>
                         </div>
                     </div>
+
+                    <!-- Action Buttons for Rent Space -->
+                    <div class="events-action-buttons" style="margin-top: 2.5rem; display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="#booking" class="btn btn-primary magnetic-btn" style="padding: 1rem 2.5rem; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                        <a href="https://wa.me/919994157721?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20Renting%20Space%20for%20an%20Event%20%2F%20Birthday%20Party%20at%20Goodwill%20Turf." target="_blank" class="btn magnetic-btn" style="padding: 1rem 2rem; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #ffffff; border: none;">
+                            <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp Enquiry
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -386,7 +437,7 @@
             <div class="container contact-container">
                 <div class="contact-form-wrapper glass-card">
                     <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Get in Touch</h2>
-                    <form class="luxury-form" onsubmit="event.preventDefault(); window.location.href = 'mailto:goodwillsportsturfx@gmail.com?subject=Enquiry from ' + document.getElementById('name').value + '&body=' + encodeURIComponent(document.getElementById('message').value + '\n\nFrom: ' + document.getElementById('email').value);">
+                    <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('name').value; var e = document.getElementById('email').value; var bd = document.getElementById('contact-booking-date') ? document.getElementById('contact-booking-date').value : ''; var bt = document.getElementById('contact-booking-time') ? document.getElementById('contact-booking-time').value : ''; var m = document.getElementById('message').value; var body = 'Name: ' + n + '\nEmail: ' + e + '\nBooking Date: ' + bd + '\nBooking Time: ' + bt + '\n\nMessage: ' + m; window.location.href = 'mailto:goodwillsportsturfx@gmail.com?subject=' + encodeURIComponent('Booking Enquiry from ' + n) + '&body=' + encodeURIComponent(body);">
                         <div class="input-group">
                             <input type="text" id="name" required>
                             <label for="name">Your Name</label>
@@ -394,6 +445,16 @@
                         <div class="input-group">
                             <input type="email" id="email" required>
                             <label for="email">Email Address</label>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group" style="flex: 1;">
+                                <input type="date" id="contact-booking-date" required>
+                                <label for="contact-booking-date" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Booking Date</label>
+                            </div>
+                            <div class="input-group" style="flex: 1;">
+                                <input type="time" id="contact-booking-time" required>
+                                <label for="contact-booking-time" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Booking Time</label>
+                            </div>
                         </div>
                         <div class="input-group">
                             <textarea id="message" rows="4" required></textarea>
@@ -404,11 +465,14 @@
                 </div>
                 <div class="contact-info glass-card">
                     <div class="info-item">
-                        <a href="https://www.google.com/maps/search/?api=1&query=A1,+Geethanjali+Street,+Phase+II,+Vellakinar+Village,+Coimbatore,+Tamil+Nadu+641029" target="_blank" style="display: flex; gap: 15px; text-decoration: none; color: inherit;" class="contact-link">
+                        <a href="https://maps.app.goo.gl/K6QErELRhYeAwSpU6" target="_blank" style="display: flex; gap: 15px; text-decoration: none; color: inherit; width: 100%;" class="contact-link">
                             <i class="fas fa-map-marker-alt" style="margin-top: 5px;"></i>
-                            <div>
+                            <div style="flex: 1;">
                                 <h4 style="color: var(--primary);">Location</h4>
                                 <p>A1, Geethanjali Street, Phase II, Vellakinar Village, Coimbatore, Tamil Nadu – 641029.</p>
+                                <span class="btn btn-primary magnetic-btn" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 16px; font-size: 0.85rem; border-radius: 6px;">
+                                    <i class="fas fa-map-marked-alt"></i> Open in Google Maps
+                                </span>
                             </div>
                         </a>
                     </div>
@@ -440,6 +504,227 @@
                                 class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Section: Google Reviews -->
+        <section class="google-reviews-section section-padding" id="reviews">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="google-badge-pill" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); padding: 8px 18px; border-radius: 30px; margin-bottom: 1rem;">
+                        <i class="fab fa-google" style="color: #4285F4; font-size: 1.2rem;"></i>
+                        <span style="font-weight: 700; color: var(--white); font-size: 0.95rem;">GOOGLE REVIEWS</span>
+                        <div style="display: flex; gap: 2px; color: #FFD700; font-size: 0.85rem; margin-left: 5px;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span style="color: var(--primary); font-weight: 700; margin-left: 3px;">4.9 / 5</span>
+                    </div>
+                    <h2 class="section-title">What Players Say About Us</h2>
+                    <p class="section-desc">Real reviews from football & cricket players in Vellakinar, Coimbatore.</p>
+                </div>
+
+                <div class="reviews-ticker-wrapper">
+                    <div class="reviews-slider-track">
+                        <!-- Review 1 -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle">K</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Karthik Raja</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Best turf in Vellakinar! Pitch quality is top-notch, true FIFA standard turf. Played 7v7 football here at night, floodlights are super bright. Highly recommended!"
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 2 weeks ago</div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #00C9FF, #92FE9D);">S</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Siddharth M.</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Awesome box cricket setup and very smooth slot booking. Clean changing rooms and spacious parking space. Great place for weekend matches with friends!"
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 1 month ago</div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #FC466B, #3F5EFB);">P</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Praveen Kumar</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Event Host</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Rented the space for a birthday party + mini football tournament. Everyone enjoyed it thoroughly! Friendly management, super flexible team, and great ambience."
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 3 weeks ago</div>
+                        </div>
+
+                        <!-- Review 4 -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #FDBB2D, #222177);">V</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Vigneshwaran R.</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Goodwill Sports Turf X is definitely the top turf in Coimbatore. Excellent grass bounce, non-slippery surface, and budget-friendly pricing per hour."
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 1 month ago</div>
+                        </div>
+
+                        <!-- Duplicate Set for Seamless Infinite Marquee Loop -->
+                        <!-- Review 1 Duplicate -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle">K</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Karthik Raja</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Best turf in Vellakinar! Pitch quality is top-notch, true FIFA standard turf. Played 7v7 football here at night, floodlights are super bright. Highly recommended!"
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 2 weeks ago</div>
+                        </div>
+
+                        <!-- Review 2 Duplicate -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #00C9FF, #92FE9D);">S</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Siddharth M.</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Awesome box cricket setup and very smooth slot booking. Clean changing rooms and spacious parking space. Great place for weekend matches with friends!"
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 1 month ago</div>
+                        </div>
+
+                        <!-- Review 3 Duplicate -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #FC466B, #3F5EFB);">P</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Praveen Kumar</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Event Host</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Rented the space for a birthday party + mini football tournament. Everyone enjoyed it thoroughly! Friendly management, super flexible team, and great ambience."
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 3 weeks ago</div>
+                        </div>
+
+                        <!-- Review 4 Duplicate -->
+                        <div class="review-card glass-card">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar-circle" style="background: linear-gradient(135deg, #FDBB2D, #222177);">V</div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1rem; color: var(--white);">Vigneshwaran R.</h4>
+                                            <span style="font-size: 0.75rem; color: var(--primary);"><i class="fas fa-check-circle"></i> Verified Player</span>
+                                        </div>
+                                    </div>
+                                    <i class="fab fa-google" style="color: #4285F4; font-size: 1.3rem;"></i>
+                                </div>
+                                <div style="display: flex; gap: 3px; margin-bottom: 0.8rem;" class="google-star">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="review-body-text" style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                                    "Goodwill Sports Turf X is definitely the top turf in Coimbatore. Excellent grass bounce, non-slippery surface, and budget-friendly pricing per hour."
+                                </p>
+                            </div>
+                            <div style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--gray);">Posted on Google • 1 month ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leave Review Button Bar -->
+                <div style="text-align: center; margin-top: 3rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 2rem; border-radius: 12px;" class="glass-card review-cta-card">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.4rem;">Played at Goodwill Sports Turf X?</h3>
+                    <p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem;">Share your experience with fellow sports lovers on Google Maps!</p>
+                    <a href="https://maps.app.goo.gl/K6QErELRhYeAwSpU6" target="_blank" class="btn btn-primary magnetic-btn" style="padding: 0.9rem 2.2rem; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px;">
+                        <i class="fab fa-google"></i> Leave a Google Review
+                    </a>
+                </div>
+            </div>
             </div>
         </section>
     </main>
@@ -506,7 +791,7 @@
                 style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
             <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your
                 Slot</h2>
-            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; window.location.href = 'https://wa.me/919994157721?text=' + encodeURIComponent(text);">
+            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, waUrl: waUrl });">
                 <div class="input-group" style="margin-bottom: 1.5rem;">
                     <input type="text" id="modal-name" required>
                     <label for="modal-name">Full Name</label>

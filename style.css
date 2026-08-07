@@ -257,9 +257,20 @@ ul {
     display: block;
 }
 
+.nav {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links {
     display: flex;
-    gap: 3rem;
+    align-items: center;
+    gap: 2rem;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
@@ -1473,6 +1484,19 @@ ul {
     outline: none;
     transition: var(--transition);
     resize: none;
+    color-scheme: dark;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 576px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 }
 
 .input-group label {
@@ -2168,4 +2192,174 @@ body.light-theme #theme-toggle:hover {
     color: inherit;
     text-decoration: none;
 }
+
+/* ==================================================
+   GOOGLE REVIEWS SECTION & NON-DISRUPTIVE ANIMATION
+================================================== */
+.google-reviews-section {
+    background: var(--bg-secondary);
+    overflow: hidden;
+}
+.reviews-ticker-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: 1.5rem 0;
+    margin-top: 1.5rem;
+}
+.reviews-ticker-wrapper::before,
+.reviews-ticker-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+.reviews-ticker-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+.reviews-ticker-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+.reviews-slider-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marqueeReviews 30s linear infinite;
+    will-change: transform;
+}
+.reviews-slider-track:hover {
+    animation-play-state: paused;
+}
+.review-card {
+    flex: 0 0 340px;
+    width: 340px;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+.review-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 15px 35px rgba(255, 106, 0, 0.25);
+    z-index: 2;
+}
+.avatar-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #FF4500);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.3);
+    flex-shrink: 0;
+}
+.google-star {
+    color: #FFD700;
+    font-size: 0.95rem;
+}
+
+.review-body-text {
+    color: var(--white);
+    opacity: 0.9;
+}
+
+@keyframes marqueeReviews {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-340px * 4 - 1.5rem * 4));
+    }
+}
+
+@media (max-width: 768px) {
+    .review-card {
+        flex: 0 0 290px;
+        width: 290px;
+    }
+    @keyframes marqueeReviews {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-290px * 4 - 1.5rem * 4));
+        }
+    }
+}
+
+/* ==================================================
+   LIGHT MODE OVERRIDES FOR GOOGLE REVIEWS
+================================================== */
+body.light-theme .google-reviews-section {
+    background: var(--bg-main) !important;
+}
+
+body.light-theme .google-badge-pill {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme .review-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .review-card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 14px 35px rgba(255, 106, 0, 0.2) !important;
+}
+
+body.light-theme .review-card h4 {
+    color: #111111 !important;
+}
+
+body.light-theme .review-body-text {
+    color: #333333 !important;
+    opacity: 1 !important;
+}
+
+body.light-theme .reviews-ticker-wrapper::before {
+    background: linear-gradient(to right, var(--bg-main), transparent) !important;
+}
+
+body.light-theme .reviews-ticker-wrapper::after {
+    background: linear-gradient(to left, var(--bg-main), transparent) !important;
+}
+
+body.light-theme .review-cta-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .review-cta-card h3 {
+    color: #111111 !important;
+}
+
+body.light-theme .thankyou-modal-content {
+    background: #FFFFFF !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.light-theme #thankYouDetails {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
 
