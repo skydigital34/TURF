@@ -1748,8 +1748,11 @@ ul {
 
 .booking-modal-content {
     position: relative;
-    width: 90%;
-    max-width: 500px;
+    width: 92%;
+    max-width: 420px;
+    padding: 1.4rem 1.5rem !important;
+    max-height: 88vh;
+    overflow-y: auto;
     transform: translateY(50px);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -2459,6 +2462,47 @@ body.light-theme #thankYouDetails {
         gap: 8px;
     }
 }
+
+/* Time Selectors (Hours, Minutes, AM/PM) */
+.time-adjuster-group {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.time-select-pill {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 10px 6px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-border-box;
+}
+
+.time-select-pill:focus, .time-select-pill:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 12px rgba(255, 106, 0, 0.3);
+}
+
+body.light-theme .time-adjuster-group {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+body.light-theme .time-select-pill {
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
 
 
 

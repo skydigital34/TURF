@@ -806,10 +806,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function setTimeSelectors(prefix, timeStr) {
+        const m = timeStr.match(/(\d{2}):(\d{2})\s*(AM|PM)\s*-\s*(\d{2}):(\d{2})\s*(AM|PM)/i);
+        if (!m) return;
+        const startHr = document.getElementById(`${prefix}-start-hour`);
+        const startMin = document.getElementById(`${prefix}-start-min`);
+        const startAmPm = document.getElementById(`${prefix}-start-ampm`);
+        const endHr = document.getElementById(`${prefix}-end-hour`);
+        const endMin = document.getElementById(`${prefix}-end-min`);
+        const endAmPm = document.getElementById(`${prefix}-end-ampm`);
+
+        if (startHr) startHr.value = m[1];
+        if (startMin) startMin.value = m[2];
+        if (startAmPm) startAmPm.value = m[3].toUpperCase();
+        if (endHr) endHr.value = m[4];
+        if (endMin) endMin.value = m[5];
+        if (endAmPm) endAmPm.value = m[6].toUpperCase();
+    }
+
+    function getTimeSelectorsValue(prefix) {
+        const startHr = document.getElementById(`${prefix}-start-hour`)?.value || '06';
+        const startMin = document.getElementById(`${prefix}-start-min`)?.value || '00';
+        const startAmPm = document.getElementById(`${prefix}-start-ampm`)?.value || 'PM';
+        const endHr = document.getElementById(`${prefix}-end-hour`)?.value || '07';
+        const endMin = document.getElementById(`${prefix}-end-min`)?.value || '00';
+        const endAmPm = document.getElementById(`${prefix}-end-ampm`)?.value || 'PM';
+
+        return `${startHr}:${startMin} ${startAmPm} - ${endHr}:${endMin} ${endAmPm}`;
+    }
+
     function updateSelectedSlotBanner() {
         const banner = document.getElementById('selected-slot-banner');
         const textEl = document.getElementById('selected-slot-text');
-        const timingInput = document.getElementById('b-timing');
         
         if (selectedSlot) {
             const formatted = `${selectedSlot.time} (${selectedSlot.sport.toUpperCase()})`;
@@ -817,9 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 banner.style.display = 'flex';
                 textEl.textContent = formatted;
             }
-            if (timingInput) {
-                timingInput.value = formatted;
-            }
+            setTimeSelectors('b', selectedSlot.time);
         } else {
             if (banner) banner.style.display = 'none';
         }
@@ -865,13 +891,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('b-name').value.trim();
         const phone = document.getElementById('b-phone').value.trim();
         const dateVal = document.getElementById('booking-date') ? document.getElementById('booking-date').value : '';
-        const timingInput = document.getElementById('b-timing');
 
-        let slotTiming = '';
-        if (timingInput && timingInput.value.trim()) {
-            slotTiming = timingInput.value.trim();
-        } else if (selectedSlot) {
-            slotTiming = `${selectedSlot.time} (${selectedSlot.sport.toUpperCase()})`;
+        let slotTiming = getTimeSelectorsValue('b');
+        if (selectedSlot) {
+            slotTiming += ` (${selectedSlot.sport.toUpperCase()})`;
         }
 
         let message = `Hi, I would like to book a slot on Goodwill Sports Turf X.`;

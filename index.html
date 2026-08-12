@@ -196,9 +196,62 @@
                                 <label for="b-phone">Phone Number</label>
                             </div>
                         </div>
-                        <div class="input-group" style="margin-bottom: 1rem;">
-                            <input type="text" id="b-timing" placeholder="Select slot above or type custom timing (e.g., 06:30 AM - 07:30 AM)">
-                            <label for="b-timing" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Adjust Timing / Custom Time Slot</label>
+                        <div class="time-adjuster-group">
+                            <label style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                <i class="far fa-clock" style="font-size: 1.1rem;"></i> Match Timing Adjuster (Hours, Minutes, AM/PM)
+                            </label>
+
+                            <!-- Row 1: FROM -->
+                            <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.82rem; color: var(--gray); font-weight: 700; width: 45px; flex-shrink: 0;">FROM:</span>
+                                
+                                <select id="b-start-hour" class="time-select-pill" style="flex: 1;">
+                                    <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                                    <option value="04">04</option><option value="05">05</option><option value="06" selected>06</option>
+                                    <option value="07">07</option><option value="08">08</option><option value="09">09</option>
+                                    <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                                </select>
+                                
+                                <span style="font-weight: bold; color: var(--primary);">:</span>
+
+                                <select id="b-start-min" class="time-select-pill" style="flex: 1;">
+                                    <option value="00" selected>00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+
+                                <select id="b-start-ampm" class="time-select-pill" style="flex: 1;">
+                                    <option value="AM">AM</option>
+                                    <option value="PM" selected>PM</option>
+                                </select>
+                            </div>
+
+                            <!-- Row 2: TO -->
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <span style="font-size: 0.82rem; color: var(--gray); font-weight: 700; width: 45px; flex-shrink: 0;">TO:</span>
+
+                                <select id="b-end-hour" class="time-select-pill" style="flex: 1;">
+                                    <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                                    <option value="04">04</option><option value="05">05</option><option value="06">06</option>
+                                    <option value="07" selected>07</option><option value="08">08</option><option value="09">09</option>
+                                    <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                                </select>
+                                
+                                <span style="font-weight: bold; color: var(--primary);">:</span>
+
+                                <select id="b-end-min" class="time-select-pill" style="flex: 1;">
+                                    <option value="00" selected>00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+
+                                <select id="b-end-ampm" class="time-select-pill" style="flex: 1;">
+                                    <option value="AM">AM</option>
+                                    <option value="PM" selected>PM</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="booking-action text-center mt-2">
                             <button type="submit" class="btn btn-primary magnetic-btn w-100">Confirm Booking</button>
@@ -814,25 +867,64 @@
         <div class="booking-modal-content glass-card">
             <span class="modal-close" id="bookingModalClose"
                 style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
-            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your Slot</h2>
-            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var t = document.getElementById('modal-custom-time') ? document.getElementById('modal-custom-time').value : ''; var text = 'Hi, I would like to book a slot on Goodwill Sports Turf X.' + (d ? '\nDate: ' + d : '') + (t ? '\nSlot Timing: ' + t : '') + '\nName: ' + n + '\nPhone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, time: t, waUrl: waUrl });">
-                <div class="input-group" style="margin-bottom: 1.5rem;">
+            <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 1rem; text-align: center;">Book Your Slot</h2>
+            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var sh = document.getElementById('modal-start-hour').value; var sm = document.getElementById('modal-start-min').value; var sa = document.getElementById('modal-start-ampm').value; var eh = document.getElementById('modal-end-hour').value; var em = document.getElementById('modal-end-min').value; var ea = document.getElementById('modal-end-ampm').value; var t = sh + ':' + sm + ' ' + sa + ' - ' + eh + ':' + em + ' ' + ea; var text = 'Hi, I would like to book a slot on Goodwill Sports Turf X.' + (d ? '\nDate: ' + d : '') + '\nSlot Timing: ' + t + '\nName: ' + n + '\nPhone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, time: t, waUrl: waUrl });">
+                <div class="input-group" style="margin-bottom: 1rem;">
                     <input type="text" id="modal-name" required>
                     <label for="modal-name">Full Name</label>
                 </div>
-                <div class="input-group" style="margin-bottom: 1.5rem;">
+                <div class="input-group" style="margin-bottom: 1rem;">
                     <input type="tel" id="modal-phone" required>
                     <label for="modal-phone">Phone Number</label>
                 </div>
-                <div class="input-group" style="margin-bottom: 1.5rem;">
+                <div class="input-group" style="margin-bottom: 1rem;">
                     <input type="date" id="modal-date" required>
                     <label for="modal-date" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Select Date</label>
                 </div>
-                <div class="input-group" style="margin-bottom: 1.5rem;">
-                    <input type="text" id="modal-custom-time" placeholder="e.g. 06:30 AM - 08:30 AM or 2 Hours">
-                    <label for="modal-custom-time" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Preferred Timing / Time Slot</label>
+                <div class="time-adjuster-group" style="margin-bottom: 1.1rem; padding: 0.8rem 0.9rem;">
+                    <label style="font-size: 0.8rem; color: var(--primary); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <i class="far fa-clock" style="font-size: 1rem;"></i> Timing Adjuster (Hours, Mins, AM/PM)
+                    </label>
+                    
+                    <!-- Row 1: FROM -->
+                    <div style="display: flex; gap: 4px; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; width: 40px; flex-shrink: 0;">FROM:</span>
+                        <select id="modal-start-hour" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                            <option value="04">04</option><option value="05">05</option><option value="06" selected>06</option>
+                            <option value="07">07</option><option value="08">08</option><option value="09">09</option>
+                            <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                        </select>
+                        <span style="font-weight: bold; color: var(--primary);">:</span>
+                        <select id="modal-start-min" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="00" selected>00</option><option value="15">15</option>
+                            <option value="30">30</option><option value="45">45</option>
+                        </select>
+                        <select id="modal-start-ampm" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="AM">AM</option><option value="PM" selected>PM</option>
+                        </select>
+                    </div>
+
+                    <!-- Row 2: TO -->
+                    <div style="display: flex; gap: 4px; align-items: center;">
+                        <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; width: 40px; flex-shrink: 0;">TO:</span>
+                        <select id="modal-end-hour" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                            <option value="04">04</option><option value="05">05</option><option value="06">06</option>
+                            <option value="07" selected>07</option><option value="08">08</option><option value="09">09</option>
+                            <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                        </select>
+                        <span style="font-weight: bold; color: var(--primary);">:</span>
+                        <select id="modal-end-min" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="00" selected>00</option><option value="15">15</option>
+                            <option value="30">30</option><option value="45">45</option>
+                        </select>
+                        <select id="modal-end-ampm" class="time-select-pill" style="flex: 1; padding: 6px 4px; font-size: 0.88rem;">
+                            <option value="AM">AM</option><option value="PM" selected>PM</option>
+                        </select>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 1.2rem;">Confirm Booking</button>
+                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 0.85rem 1.5rem;">Confirm Booking</button>
             </form>
         </div>
     </div>
