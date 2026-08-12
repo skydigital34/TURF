@@ -98,7 +98,10 @@
                             <option value="cricket">Cricket</option>
                         </select>
                     </div>
-                    <button class="btn btn-secondary" onclick="addSlot()" style="height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: none;">Add Slot</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-secondary" onclick="addSlot()" style="height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: none; background: var(--primary); color: white;">Add Slot</button>
+                        <button class="btn btn-secondary" onclick="resetDefaultSlots()" style="height: 40px; padding: 0 15px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--gray);">Reset 24H Default Slots</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,15 +114,34 @@
         }
 
         const defaultSlots = [
-            { id: 1, time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
-            { id: 2, time: "07:00 AM - 08:00 AM", status: "limited", sport: "cricket" },
-            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "football" },
-            { id: 4, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
-            { id: 5, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
-            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "cricket" }
+            { id: 1,  time: "05:00 AM - 06:00 AM", status: "available", sport: "football" },
+            { id: 2,  time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
+            { id: 3,  time: "07:00 AM - 08:00 AM", status: "limited",   sport: "cricket" },
+            { id: 4,  time: "08:00 AM - 09:00 AM", status: "booked",    sport: "football" },
+            { id: 5,  time: "09:00 AM - 10:00 AM", status: "available", sport: "football" },
+            { id: 6,  time: "10:00 AM - 11:00 AM", status: "available", sport: "cricket" },
+            { id: 7,  time: "11:00 AM - 12:00 PM", status: "available", sport: "football" },
+            { id: 8,  time: "12:00 PM - 01:00 PM", status: "available", sport: "cricket" },
+            { id: 9,  time: "01:00 PM - 02:00 PM", status: "available", sport: "football" },
+            { id: 10, time: "02:00 PM - 03:00 PM", status: "available", sport: "cricket" },
+            { id: 11, time: "03:00 PM - 04:00 PM", status: "available", sport: "football" },
+            { id: 12, time: "04:00 PM - 05:00 PM", status: "limited",   sport: "football" },
+            { id: 13, time: "05:00 PM - 06:00 PM", status: "available", sport: "football" },
+            { id: 14, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
+            { id: 15, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
+            { id: 16, time: "08:00 PM - 09:00 PM", status: "booked",    sport: "cricket" },
+            { id: 17, time: "09:00 PM - 10:00 PM", status: "available", sport: "football" },
+            { id: 18, time: "10:00 PM - 11:00 PM", status: "available", sport: "cricket" },
+            { id: 19, time: "11:00 PM - 12:00 AM", status: "available", sport: "football" },
+            { id: 20, time: "12:00 AM - 01:00 AM", status: "available", sport: "football" },
+            { id: 21, time: "01:00 AM - 02:00 AM", status: "available", sport: "cricket" },
+            { id: 22, time: "02:00 AM - 03:00 AM", status: "available", sport: "football" },
+            { id: 23, time: "03:00 AM - 04:00 AM", status: "available", sport: "football" },
+            { id: 24, time: "04:00 AM - 05:00 AM", status: "available", sport: "cricket" }
         ];
 
-        let slots = JSON.parse(localStorage.getItem('turfx_slots')) || defaultSlots;
+        const storedSlots = JSON.parse(localStorage.getItem('turfx_slots'));
+        let slots = (storedSlots && storedSlots.length >= 6) ? storedSlots : defaultSlots;
         let pricing = JSON.parse(localStorage.getItem('turfx_pricing')) || { weekdays: 700, weekends: 800 };
 
         function renderPricing() {
@@ -140,7 +162,7 @@
             slots.forEach((slot, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${slot.time}</td>
+                    <td><input type="text" value="${slot.time}" onchange="updateSlot(${index}, 'time', this.value)" style="min-width: 180px; padding: 6px; font-size: 0.9rem;"></td>
                     <td>
                         <select onchange="updateSlot(${index}, 'status', this.value)">
                             <option value="available" ${slot.status === 'available' ? 'selected' : ''}>Available</option>
@@ -182,6 +204,15 @@
                 slots.splice(index, 1);
                 saveSlots();
                 renderSlots();
+            }
+        }
+
+        function resetDefaultSlots() {
+            if(confirm("Reset all slots to default 24-hour schedule?")) {
+                slots = JSON.parse(JSON.stringify(defaultSlots));
+                saveSlots();
+                renderSlots();
+                alert("Reset successfully!");
             }
         }
 

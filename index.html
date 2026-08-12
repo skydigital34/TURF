@@ -144,36 +144,61 @@
                 <div class="booking-widget glass-card">
                     <div class="booking-controls" style="flex-wrap: wrap; gap: 20px;">
                         <div class="sport-filters" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button class="filter-btn active sport-btn" data-sport="football"><i
-                                    class="fas fa-futbol"></i> Football</button>
-                            <button class="filter-btn sport-btn" data-sport="cricket"><i
-                                    class="fas fa-baseball-ball"></i> Cricket</button>
+                            <button class="filter-btn active sport-btn" data-sport="all"><i class="fas fa-th-large"></i> All Sports</button>
+                            <button class="filter-btn sport-btn" data-sport="football"><i class="fas fa-futbol"></i> Football</button>
+                            <button class="filter-btn sport-btn" data-sport="cricket"><i class="fas fa-baseball-ball"></i> Cricket</button>
                         </div>
                         <div class="date-picker">
                             <i class="far fa-calendar-alt"></i>
-                            <input type="date" id="booking-date" value="2024-05-20">
+                            <input type="date" id="booking-date">
                         </div>
                         <div class="legend">
                             <span class="legend-item"><span class="dot dot-green"></span> Available</span>
                             <span class="legend-item"><span class="dot dot-orange"></span> Limited</span>
                             <span class="legend-item"><span class="dot dot-red"></span> Booked</span>
                         </div>
+                        <div class="time-filters">
+                            <span style="font-size:0.85rem; color:var(--gray); margin-right:4px;"><i class="far fa-clock"></i> Filter Timing:</span>
+                            <button class="time-filter-btn active" data-time="all">All Timings (24 Hours)</button>
+                            <button class="time-filter-btn" data-time="morning"><i class="fas fa-sun" style="color:#f39c12;"></i> Morning (5AM - 12PM)</button>
+                            <button class="time-filter-btn" data-time="afternoon"><i class="fas fa-cloud-sun" style="color:#e67e22;"></i> Afternoon (12PM - 5PM)</button>
+                            <button class="time-filter-btn" data-time="evening"><i class="fas fa-cloud-moon" style="color:#9b59b6;"></i> Evening (5PM - 9PM)</button>
+                            <button class="time-filter-btn" data-time="night"><i class="fas fa-moon" style="color:#3498db;"></i> Night & Late Night (9PM - 5AM)</button>
+                        </div>
                     </div>
+                    
                     <div class="slots-grid" id="slots-grid">
                         <!-- Populated by JS -->
                     </div>
-                    <form class="luxury-form mt-4" onsubmit="event.preventDefault(); var n = document.getElementById('b-name').value; var p = document.getElementById('b-phone').value; var d = document.getElementById('booking-date') ? document.getElementById('booking-date').value : ''; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, waUrl: waUrl });"
+
+                    <!-- Selected Slot Banner -->
+                    <div id="selected-slot-banner" class="selected-slot-banner" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-check-circle" style="color: var(--primary); font-size: 1.4rem;"></i>
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--gray); display: block;">SELECTED TIMING & SPORT:</span>
+                                <strong id="selected-slot-text" style="color: var(--white); font-size: 1.05rem;">-</strong>
+                            </div>
+                        </div>
+                        <span style="font-size: 0.8rem; background: rgba(255,106,0,0.2); color: var(--primary); padding: 4px 10px; border-radius: 12px; font-weight: 600;">Selected</span>
+                    </div>
+
+                    <form id="booking-form" class="luxury-form mt-4" onsubmit="handleBookingFormSubmit(event)"
                         style="text-align: left; padding-top: 1.5rem; border-top: 1px solid var(--border);">
                         <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Enter Your Details</h3>
-                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                            <div class="input-group" style="flex: 1;">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <div class="input-group" style="flex: 1; min-width: 220px;">
                                 <input type="text" id="b-name" required>
                                 <label for="b-name">Full Name</label>
                             </div>
-                            <div class="input-group" style="flex: 1;">
+                            <div class="input-group" style="flex: 1; min-width: 220px;">
                                 <input type="tel" id="b-phone" required>
                                 <label for="b-phone">Phone Number</label>
                             </div>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 1rem;">
+                            <input type="text" id="b-timing" placeholder="Select slot above or type custom timing (e.g., 06:30 AM - 07:30 AM)">
+                            <label for="b-timing" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Adjust Timing / Custom Time Slot</label>
                         </div>
                         <div class="booking-action text-center mt-2">
                             <button type="submit" class="btn btn-primary magnetic-btn w-100">Confirm Booking</button>
@@ -789,9 +814,8 @@
         <div class="booking-modal-content glass-card">
             <span class="modal-close" id="bookingModalClose"
                 style="top: 15px; right: 20px; font-size: 2rem;">&times;</span>
-            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your
-                Slot</h2>
-            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var text = 'Hi, I would like to book a slot on ' + d + '. Name: ' + n + ', Phone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, waUrl: waUrl });">
+            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Book Your Slot</h2>
+            <form class="luxury-form" onsubmit="event.preventDefault(); var n = document.getElementById('modal-name').value; var p = document.getElementById('modal-phone').value; var d = document.getElementById('modal-date').value; var t = document.getElementById('modal-custom-time') ? document.getElementById('modal-custom-time').value : ''; var text = 'Hi, I would like to book a slot on Goodwill Sports Turf X.' + (d ? '\nDate: ' + d : '') + (t ? '\nSlot Timing: ' + t : '') + '\nName: ' + n + '\nPhone: ' + p; var waUrl = 'https://wa.me/919994157721?text=' + encodeURIComponent(text); showThankYouModal({ name: n, phone: p, date: d, time: t, waUrl: waUrl });">
                 <div class="input-group" style="margin-bottom: 1.5rem;">
                     <input type="text" id="modal-name" required>
                     <label for="modal-name">Full Name</label>
@@ -802,11 +826,13 @@
                 </div>
                 <div class="input-group" style="margin-bottom: 1.5rem;">
                     <input type="date" id="modal-date" required>
-                    <label for="modal-date" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Select
-                        Date</label>
+                    <label for="modal-date" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Select Date</label>
                 </div>
-                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 1.2rem;">Confirm
-                    Booking</button>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <input type="text" id="modal-custom-time" placeholder="e.g. 06:30 AM - 08:30 AM or 2 Hours">
+                    <label for="modal-custom-time" style="top: -10px; font-size: 0.8rem; color: var(--primary);">Preferred Timing / Time Slot</label>
+                </div>
+                <button type="submit" class="btn btn-primary magnetic-btn w-100" style="padding: 1.2rem;">Confirm Booking</button>
             </form>
         </div>
     </div>

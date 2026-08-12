@@ -141,74 +141,9 @@ filterBtns.forEach(btn => {
 });
 
 // ==========================================
-// DATE PICKER ANIMATION (REALISTIC DATA FETCH)
+// DATE & SLOT INTERACTION MANAGED IN DOMCONTENTLOADED
 // ==========================================
-const datePicker = document.getElementById('booking-date');
-const slots = document.querySelectorAll('.slot');
 
-if (datePicker && slots.length > 0) {
-    const animateSlots = () => {
-        // Animate slots out
-        gsap.to(slots, {
-            scale: 0.9,
-            opacity: 0,
-            y: 20,
-            duration: 0.3,
-            stagger: 0.05,
-            ease: 'power2.in',
-            onComplete: () => {
-
-                // Randomize slot data to simulate backend fetch
-                const statuses = ['available', 'limited', 'booked'];
-
-                slots.forEach(slot => {
-                    // Remove old status classes
-                    slot.classList.remove('available', 'limited', 'booked');
-
-                    // Pick a new random status
-                    const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
-                    slot.classList.add(newStatus);
-
-                    // Update text inside based on status
-                    const secondSpan = slot.querySelector('.price') || slot.querySelector('.status-text');
-
-                    secondSpan.className = 'status-text';
-                    if (newStatus === 'booked') {
-                        secondSpan.textContent = 'Booked';
-                    } else if (newStatus === 'limited') {
-                        secondSpan.textContent = 'Limited';
-                    } else {
-                        secondSpan.textContent = 'Available';
-                    }
-                });
-
-                // Simulate loading time and animate back in
-                setTimeout(() => {
-                    gsap.to(slots, {
-                        scale: 1,
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        stagger: 0.05,
-                        ease: 'back.out(1.5)'
-                    });
-                }, 300);
-            }
-        });
-    };
-
-    datePicker.addEventListener('change', animateSlots);
-
-    // Sport Selection Animation
-    const sportBtns = document.querySelectorAll('.sport-btn');
-    sportBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            sportBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            animateSlots();
-        });
-    });
-}
 
 // ==========================================
 // ACCORDION (FAQ)
@@ -723,10 +658,21 @@ if (bottomNavItems.length > 0) {
 }
 
 // ==========================================
-// DYNAMIC SLOTS & PRICING
+// DYNAMIC SLOTS (24 HOURS) & PRICING
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Render Pricing
+    // 1. Set default date inputs to today's date if not set
+    const todayStr = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('booking-date');
+    const modalDateInput = document.getElementById('modal-date');
+    if (dateInput && (!dateInput.value || dateInput.value === '2024-05-20')) {
+        dateInput.value = todayStr;
+    }
+    if (modalDateInput && (!modalDateInput.value || modalDateInput.value === '2024-05-20')) {
+        modalDateInput.value = todayStr;
+    }
+
+    // 2. Render Pricing
     const pricing = JSON.parse(localStorage.getItem('turfx_pricing'));
     if (pricing) {
         const weekdayEl = document.getElementById('price-weekday');
@@ -735,64 +681,207 @@ document.addEventListener('DOMContentLoaded', () => {
         if (weekendEl) weekendEl.textContent = pricing.weekends;
     }
 
-    // Render Slots
+    // 3. Complete 24-Hour Slots Data
+    const defaultTurfSlots = [
+        { id: 1,  time: "05:00 AM - 06:00 AM", status: "available", sport: "football" },
+        { id: 2,  time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
+        { id: 3,  time: "07:00 AM - 08:00 AM", status: "limited",   sport: "cricket" },
+        { id: 4,  time: "08:00 AM - 09:00 AM", status: "booked",    sport: "football" },
+        { id: 5,  time: "09:00 AM - 10:00 AM", status: "available", sport: "football" },
+        { id: 6,  time: "10:00 AM - 11:00 AM", status: "available", sport: "cricket" },
+        { id: 7,  time: "11:00 AM - 12:00 PM", status: "available", sport: "football" },
+        { id: 8,  time: "12:00 PM - 01:00 PM", status: "available", sport: "cricket" },
+        { id: 9,  time: "01:00 PM - 02:00 PM", status: "available", sport: "football" },
+        { id: 10, time: "02:00 PM - 03:00 PM", status: "available", sport: "cricket" },
+        { id: 11, time: "03:00 PM - 04:00 PM", status: "available", sport: "football" },
+        { id: 12, time: "04:00 PM - 05:00 PM", status: "limited",   sport: "football" },
+        { id: 13, time: "05:00 PM - 06:00 PM", status: "available", sport: "football" },
+        { id: 14, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
+        { id: 15, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
+        { id: 16, time: "08:00 PM - 09:00 PM", status: "booked",    sport: "cricket" },
+        { id: 17, time: "09:00 PM - 10:00 PM", status: "available", sport: "football" },
+        { id: 18, time: "10:00 PM - 11:00 PM", status: "available", sport: "cricket" },
+        { id: 19, time: "11:00 PM - 12:00 AM", status: "available", sport: "football" },
+        { id: 20, time: "12:00 AM - 01:00 AM", status: "available", sport: "football" },
+        { id: 21, time: "01:00 AM - 02:00 AM", status: "available", sport: "cricket" },
+        { id: 22, time: "02:00 AM - 03:00 AM", status: "available", sport: "football" },
+        { id: 23, time: "03:00 AM - 04:00 AM", status: "available", sport: "football" },
+        { id: 24, time: "04:00 AM - 05:00 AM", status: "available", sport: "cricket" }
+    ];
+
     const slotsGrid = document.getElementById('slots-grid');
-    if (slotsGrid) {
-        const slots = JSON.parse(localStorage.getItem('turfx_slots')) || [
-            { id: 1, time: "06:00 AM - 07:00 AM", status: "available", sport: "football" },
-            { id: 2, time: "07:00 AM - 08:00 AM", status: "limited", sport: "cricket" },
-            { id: 3, time: "08:00 AM - 09:00 AM", status: "booked", sport: "football" },
-            { id: 4, time: "06:00 PM - 07:00 PM", status: "available", sport: "football" },
-            { id: 5, time: "07:00 PM - 08:00 PM", status: "available", sport: "cricket" },
-            { id: 6, time: "08:00 PM - 09:00 PM", status: "booked", sport: "cricket" }
-        ];
+    let currentSportFilter = 'all';
+    let currentTimeFilter = 'all';
+    let selectedSlot = null;
 
-        const sportIcons = {
-            football: 'fa-futbol',
-            cricket: 'fa-baseball-ball'
-        };
+    const savedSlots = JSON.parse(localStorage.getItem('turfx_slots'));
+    let slotsData = (savedSlots && savedSlots.length >= 6) ? savedSlots : defaultTurfSlots;
 
-        const statusLabels = {
-            available: 'Available',
-            limited: 'Limited',
-            booked: 'Booked'
-        };
+    // Helper: Time of day categorizer
+    function getTimeCategory(timeStr) {
+        if (timeStr.includes("05:00 AM") || timeStr.includes("06:00 AM") || timeStr.includes("07:00 AM") || 
+            timeStr.includes("08:00 AM") || timeStr.includes("09:00 AM") || timeStr.includes("10:00 AM") || 
+            timeStr.includes("11:00 AM")) {
+            return "morning";
+        }
+        if (timeStr.includes("12:00 PM") || timeStr.includes("01:00 PM") || timeStr.includes("02:00 PM") || 
+            timeStr.includes("03:00 PM") || timeStr.includes("04:00 PM")) {
+            return "afternoon";
+        }
+        if (timeStr.includes("05:00 PM") || timeStr.includes("06:00 PM") || timeStr.includes("07:00 PM") || 
+            timeStr.includes("08:00 PM")) {
+            return "evening";
+        }
+        return "night";
+    }
+
+    const sportIcons = {
+        football: 'fa-futbol',
+        cricket: 'fa-baseball-ball'
+    };
+
+    const statusLabels = {
+        available: 'Available',
+        limited: 'Limited',
+        booked: 'Booked'
+    };
+
+
+
+    // Function to Render Slots Grid
+    function renderSlots() {
+        if (!slotsGrid) return;
+
+        let filteredSlots = slotsData.filter(slot => {
+            const matchSport = (currentSportFilter === 'all' || slot.sport === currentSportFilter);
+            const matchTime = (currentTimeFilter === 'all' || getTimeCategory(slot.time) === currentTimeFilter);
+            return matchSport && matchTime;
+        });
+
+        if (filteredSlots.length === 0) {
+            slotsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 2.5rem 1rem; color: var(--gray); font-size: 1rem; width: 100%;">
+                <i class="fas fa-calendar-times" style="font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; display: block;"></i>
+                No slots match the selected filters. Please choose "All Timings" or "All Sports".
+            </div>`;
+            return;
+        }
 
         let html = '';
-        slots.forEach(slot => {
+        filteredSlots.forEach(slot => {
             const icon = sportIcons[slot.sport] || 'fa-futbol';
-            const opacity = slot.status === 'booked' ? '0.6' : '0.8';
+            const opacity = slot.status === 'booked' ? '0.5' : '0.85';
+            const isSelected = selectedSlot && selectedSlot.id === slot.id;
+            const selectedClass = isSelected ? 'selected' : '';
+
             html += `
-                <div class="slot ${slot.status}">
+                <div class="slot ${slot.status} ${selectedClass}" data-id="${slot.id}" data-time="${slot.time}" data-sport="${slot.sport}" data-status="${slot.status}">
                     <span class="time">${slot.time}</span>
                     <span class="status-text">${statusLabels[slot.status]}</span>
-                    <span class="game-detail" style="display:block; margin-top:5px; font-size:0.9rem; opacity:${opacity};">
+                    <span class="game-detail" style="display:block; margin-top:5px; font-size:0.85rem; opacity:${opacity};">
                         <i class="fas ${icon}"></i> ${slot.sport.charAt(0).toUpperCase() + slot.sport.slice(1)}
                     </span>
                 </div>
             `;
         });
         slotsGrid.innerHTML = html;
-        
-        // Re-attach hover events to new dynamic slots
-        const newSlots = document.querySelectorAll('.slot');
-        newSlots.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if(typeof cursorOutline !== 'undefined' && cursorOutline) {
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorOutline.style.backgroundColor = 'rgba(255, 106, 0, 0.1)';
+
+        // Attach Slot Selection Click Listener
+        const slotEls = slotsGrid.querySelectorAll('.slot');
+        slotEls.forEach(el => {
+            el.addEventListener('click', () => {
+                const status = el.getAttribute('data-status');
+                if (status === 'booked') {
+                    alert("This slot is already booked. Please select an available or limited slot.");
+                    return;
                 }
-                if(typeof cursorDot !== 'undefined' && cursorDot) cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                if(typeof cursorOutline !== 'undefined' && cursorOutline) {
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorOutline.style.backgroundColor = 'transparent';
+
+                const slotId = parseInt(el.getAttribute('data-id'));
+                const matched = slotsData.find(s => s.id === slotId);
+                if (matched) {
+                    selectedSlot = matched;
+                    renderSlots();
+                    updateSelectedSlotBanner();
                 }
-                if(typeof cursorDot !== 'undefined' && cursorDot) cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
             });
         });
     }
+
+    function updateSelectedSlotBanner() {
+        const banner = document.getElementById('selected-slot-banner');
+        const textEl = document.getElementById('selected-slot-text');
+        const timingInput = document.getElementById('b-timing');
+        
+        if (selectedSlot) {
+            const formatted = `${selectedSlot.time} (${selectedSlot.sport.toUpperCase()})`;
+            if (banner && textEl) {
+                banner.style.display = 'flex';
+                textEl.textContent = formatted;
+            }
+            if (timingInput) {
+                timingInput.value = formatted;
+            }
+        } else {
+            if (banner) banner.style.display = 'none';
+        }
+    }
+
+    // Attach Sport Filter Buttons
+    const sportBtns = document.querySelectorAll('.sport-btn');
+    sportBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sportBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentSportFilter = btn.getAttribute('data-sport') || 'all';
+            
+            // GSAP pulse animation on slot grid
+            if (slotsGrid && typeof gsap !== 'undefined') {
+                gsap.fromTo(slotsGrid, { opacity: 0.4, y: 5 }, { opacity: 1, y: 0, duration: 0.3 });
+            }
+            renderSlots();
+        });
+    });
+
+    // Attach Time Filter Buttons
+    const timeFilterBtns = document.querySelectorAll('.time-filter-btn');
+    timeFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            timeFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentTimeFilter = btn.getAttribute('data-time') || 'all';
+
+            if (slotsGrid && typeof gsap !== 'undefined') {
+                gsap.fromTo(slotsGrid, { opacity: 0.4, y: 5 }, { opacity: 1, y: 0, duration: 0.3 });
+            }
+            renderSlots();
+        });
+    });
+
+    // Initial render
+    renderSlots();
+
+    // Form Submission Handler for main Live Booking Widget
+    window.handleBookingFormSubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('b-name').value.trim();
+        const phone = document.getElementById('b-phone').value.trim();
+        const dateVal = document.getElementById('booking-date') ? document.getElementById('booking-date').value : '';
+        const timingInput = document.getElementById('b-timing');
+
+        let slotTiming = '';
+        if (timingInput && timingInput.value.trim()) {
+            slotTiming = timingInput.value.trim();
+        } else if (selectedSlot) {
+            slotTiming = `${selectedSlot.time} (${selectedSlot.sport.toUpperCase()})`;
+        }
+
+        let message = `Hi, I would like to book a slot on Goodwill Sports Turf X.`;
+        if (dateVal) message += `\nDate: ${dateVal}`;
+        if (slotTiming) message += `\nSlot Timing: ${slotTiming}`;
+        message += `\nName: ${name}\nPhone: ${phone}`;
+
+        const waUrl = `https://wa.me/919994157721?text=` + encodeURIComponent(message);
+        showThankYouModal({ name: name, phone: phone, date: dateVal, time: slotTiming, waUrl: waUrl });
+    };
 });
 
 // ==========================================

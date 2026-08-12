@@ -2362,4 +2362,103 @@ body.light-theme #thankYouDetails {
     border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
+/* ==================================================
+   ENHANCED SLOT TIMINGS & SELECTION STYLES
+================================================== */
+.time-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.time-filter-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--gray);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-filter-btn:hover {
+    color: var(--white);
+    border-color: var(--primary);
+    background: rgba(255, 106, 0, 0.1);
+}
+
+.time-filter-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 12px rgba(255, 106, 0, 0.4);
+}
+
+.slot {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.slot.selected {
+    background: rgba(255, 106, 0, 0.18) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 18px rgba(255, 106, 0, 0.5) !important;
+    transform: scale(1.05) translateY(-3px) !important;
+}
+
+.slot.selected::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: rgba(255, 106, 0, 0.2);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected-slot-banner {
+    background: linear-gradient(135deg, rgba(255, 106, 0, 0.15), rgba(255, 106, 0, 0.05));
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    animation: fadeInBanner 0.4s ease-out;
+}
+
+@keyframes fadeInBanner {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .time-filter-btn {
+        padding: 5px 10px;
+        font-size: 0.78rem;
+    }
+    .selected-slot-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+
 
